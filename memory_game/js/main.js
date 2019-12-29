@@ -23,11 +23,23 @@ let cards = [
 
 let cardsInPlay = [];
 
+function createBoard(){
+	for (let i = 0; i < cards.length; i++){
+		let cardElement = document.createElement('img');	
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', i);
+		cardElement.addEventListener('click', flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
+	}
+}
+createBoard();
 function checkForMatch(){
-	return cardsInPlay[0] === cardsInPlay[1] ? console.log("You found a match!") : console.log("Sorry, try again.");
+	return cardsInPlay[0] === cardsInPlay[1] ? alert("You found a match!") : alert("Sorry, try again.");
 }
 
-function flipCard(cardId){
+function flipCard(){
+	let cardId = this.getAttribute('data-id');
+	this.setAttribute('src', cards[cardId].cards);
 	console.log("User flipped " + cards[cardId].rank);
 	cardsInPlay.push(cards[cardId].rank);
 	if (cardsInPlay.length === 2){
